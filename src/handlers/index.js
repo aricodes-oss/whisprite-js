@@ -13,7 +13,7 @@ const register = handlerFunc => {
       command,
       aliases = [],
       permissionsLevel = PermissionsLevel.USER,
-      cooldown = 0,
+      cooldown = 2 * 1000, // 2 seconds
       overridesCooldown = PermissionsLevel.MOD,
     } = handlerFunc;
 
