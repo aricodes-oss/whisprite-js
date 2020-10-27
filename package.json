@@ -4,7 +4,7 @@
     "build": "babel src --out-dir lib --copy-files",
     "prepublishOnly": "yarn run build",
     "dev": "nodemon --exec 'yarn babel-node src/index.js' -e '.js'",
-    "start": "yarn run build && NODE_ENV=production node lib/index.js",
+    "start": "NODE_ENV=production node lib/index.js",
     "lint": "eslint ./src/",
     "fix": "eslint ./src/ --fix"
   },

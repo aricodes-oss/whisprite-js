@@ -32,4 +32,28 @@ export const getNextSequence = async collName => {
   return newDoc.current;
 };
 
+export const setLastTimestamp = async collName => {
+  const dbInterface = await db;
+  const timestamps = dbInterface.collection('timestamps');
+
+  await timestamps.findOneAndUpdate(
+    { _id: collName },
+    { $set: { _id: collName, last: Date.now() } },
+    { upsert: true },
+  );
+
+  const newDoc = await timestamps.findOne({ _id: collName });
+
+  return newDoc.last;
+};
+
+export const getLastTimestamp = async collName => {
+  const dbInterface = await db;
+  const timestamps = dbInterface.collection('timestamps');
+
+  const newDoc = (await timestamps.findOne({ _id: collName })) || { last: 0 };
+
+  return newDoc.last;
+};
+
 export default db;

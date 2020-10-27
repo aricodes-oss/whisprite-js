@@ -14,7 +14,7 @@ const client = new ChatClient({
 });
 
 client.on('ready', () => {
-  console.log('Connected to twitch!');
+  console.log('Ret-2-Go!');
 });
 
 client.on('close', error => {
@@ -25,14 +25,13 @@ client.on('close', error => {
 
 client.on('message', async input => {
   const message = { ...input };
-
-  if (!message.messageText) {
+  if (!message.messageText || !message.messageText.startsWith('!')) {
     return;
   }
 
   const parsed = split(message.messageText);
 
-  if (!parsed.length || !parsed[0].startsWith('!')) {
+  if (!parsed.length) {
     return;
   }
 

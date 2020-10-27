@@ -8,7 +8,7 @@ const addQuote = async ({ argsString, message, say }) => {
     _id: await getNextSequence('quotes'),
     body: argsString,
     author: message.senderUsername,
-    timestamp: message.serverTimeStamp,
+    timestamp: Date.now(),
   });
 
   say(`@${message.senderUsername} - Added quote #${result.insertedId}`);

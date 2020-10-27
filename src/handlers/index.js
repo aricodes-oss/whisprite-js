@@ -1,21 +1,41 @@
+import { getLastTimestamp, setLastTimestamp } from 'db';
 import { PermissionsLevel } from 'enums';
+
 import quoteHandlers from 'handlers/quotes';
+import memeHandlers from 'handlers/memes';
+import informationHandlers from 'handlers/information';
 
 const handlers = [];
 
 const register = handlerFunc => {
-  handlers.push(args => {
-    const { command, aliases = [], permissionsLevel = PermissionsLevel.USER } = handlerFunc;
+  handlers.push(async args => {
+    const {
+      command,
+      aliases = [],
+      permissionsLevel = PermissionsLevel.USER,
+      cooldown = 0,
+      overridesCooldown = PermissionsLevel.MOD,
+    } = handlerFunc;
+
     const commandMatches =
       Boolean(command) && (args.command === command || aliases.includes(args.command));
     const permissionsMatch = args.message.permissionsLevel >= permissionsLevel;
 
+    // Don't hit the DB unless we need to
     if (commandMatches && permissionsMatch) {
-      handlerFunc(args);
+      const lastUsedTimestamp = await getLastTimestamp(command);
+
+      if (
+        Date.now() - cooldown >= lastUsedTimestamp ||
+        args.message.permissionsLevel >= overridesCooldown
+      ) {
+        setLastTimestamp(command);
+        handlerFunc(args);
+      }
     }
   });
 };
 
-quoteHandlers.map(register);
+[...quoteHandlers, ...memeHandlers, ...informationHandlers].map(register);
 
 export default handlers;
