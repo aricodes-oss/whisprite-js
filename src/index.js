@@ -6,7 +6,7 @@ import { getPermissionsLevel } from 'utils';
 
 import 'environment';
 
-const channelName = 'willowthewhispersr';
+const channelName = process.env.TWITCH_CHANNEL_NAME;
 
 const client = new ChatClient({
   username: process.env.TWITCH_USERNAME,
