@@ -2,7 +2,8 @@ import { ChatClient } from 'dank-twitch-irc';
 import { split } from 'shlex';
 
 import handlers from 'handlers';
-import { getPermissionsLevel } from 'utils';
+import { getPermissionsLevel, wrapHandlerFunc } from 'utils';
+import { getCollection } from 'db';
 
 import 'environment';
 
@@ -44,8 +45,15 @@ client.on('message', async input => {
   message.permissionsLevel = getPermissionsLevel(message);
 
   const argsString = message.messageText.replace(`${command} `, '');
+  const commands = await getCollection('commands');
+  let dbCommands = await commands.find({}).toArray();
+  dbCommands = dbCommands.map(d => {
+    const result = ({ say }) => say(d.output);
+    Object.assign(result, d, { command: d._id });
+    return wrapHandlerFunc(result);
+  });
 
-  for (const handler of handlers) {
+  for (const handler of handlers.concat(dbCommands)) {
     handler({
       command: command.slice(1).toLowerCase(),
       args,

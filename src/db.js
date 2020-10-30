@@ -56,4 +56,13 @@ export const getLastTimestamp = async collName => {
   return newDoc.last;
 };
 
+export const findCommand = async name => {
+  const dbInterface = await db;
+  const commands = await dbInterface.collection('commands');
+
+  const queryName = name.startsWith('!') ? name.slice(1).toLowerCase() : name.toLowerCase();
+
+  return await commands.findOne({ $or: [{ _id: queryName }, { aliases: queryName }] });
+};
+
 export default db;
