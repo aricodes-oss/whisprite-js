@@ -8,7 +8,8 @@ const addAlias = async ({ say, args }) => {
   }
 
   const commands = await getCollection('commands');
-  let [name, ...aliases] = args;
+  let [name] = args;
+  const aliases = args.slice(1);
 
   if (name.startsWith('!')) {
     name = name.slice(1);

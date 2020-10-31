@@ -62,7 +62,7 @@ export const findCommand = async name => {
 
   const queryName = name.startsWith('!') ? name.slice(1).toLowerCase() : name.toLowerCase();
 
-  return await commands.findOne({ $or: [{ _id: queryName }, { aliases: queryName }] });
+  return commands.findOne({ $or: [{ _id: queryName }, { aliases: queryName }] });
 };
 
 export default db;

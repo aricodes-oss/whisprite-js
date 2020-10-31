@@ -10,6 +10,9 @@ module.exports = {
 
     // this is a NodeJS app
     'no-console': ['off'],
+
+    // we use mongo
+    'no-underscore-dangle': ['off'],
   },
   settings: {
     'import/resolver': {

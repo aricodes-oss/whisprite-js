@@ -9,7 +9,8 @@ const addCommand = async ({ say, args }) => {
   }
 
   const commands = await getCollection('commands');
-  let [name, output] = args;
+  let [name] = args;
+  const output = args[1];
 
   if (name.startsWith('!')) {
     name = name.slice(1);
