@@ -8,7 +8,6 @@ import { getCollection } from 'db';
 import 'environment';
 
 const channelNames = [process.env.TWITCH_CHANNEL_NAME, "journeymanb", "falconsfreak02"];
-const channelName = process.env.TWITCH_CHANNEL_NAME;
 
 const client = new ChatClient({
   username: process.env.TWITCH_USERNAME,
@@ -33,7 +32,7 @@ client.on('message', async input => {
     return;
   }
 
-  const vips = await client.getVips(channelName);
+  const vips = await client.getVips(message.channelName);
 
   message.isStreamer = message.channelName === message.senderUsername;
   message.isVip = vips.includes(message.senderUsername);
@@ -52,7 +51,7 @@ client.on('message', async input => {
     handler({
       ...parsed,
       message,
-      say: client.say.bind(client, channelName),
+      say: client.say.bind(client, message.channelName),
     });
   }
 });
