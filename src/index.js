@@ -7,7 +7,7 @@ import { getCollection } from 'db';
 
 import 'environment';
 
-const channelName = process.env.TWITCH_CHANNEL_NAME;
+const channelNames = [process.env.TWITCH_CHANNEL_NAME, "journeymanb", "falconsfreak02"];
 
 const client = new ChatClient({
   username: process.env.TWITCH_USERNAME,
@@ -57,4 +57,6 @@ client.on('message', async input => {
 });
 
 client.connect();
-client.join(channelName);
+for (const channel of channelNames) {
+  client.join(channel);
+}
