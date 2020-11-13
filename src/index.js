@@ -8,6 +8,7 @@ import { getCollection } from 'db';
 import 'environment';
 
 const channelNames = [process.env.TWITCH_CHANNEL_NAME, "journeymanb", "falconsfreak02"];
+const channelName = process.env.TWITCH_CHANNEL_NAME;
 
 const client = new ChatClient({
   username: process.env.TWITCH_USERNAME,
