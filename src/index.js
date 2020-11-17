@@ -43,7 +43,7 @@ client.on('message', async input => {
   let dbCommands = await commands.find({}).toArray();
   dbCommands = dbCommands.map(d => {
     const result = ({ say }) => say(d.output);
-    Object.assign(result, d, { command: d._id });
+    Object.assign(result, d, { command: d._id.toLowerCase() });
     return wrapHandlerFunc(result);
   });
 
