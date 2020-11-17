@@ -34,6 +34,6 @@ const addAlias = async ({ say, args }) => {
 
 addAlias.command = 'addalias';
 addAlias.aliases = ['newalias', 'alias'];
-addAlias.permissionsLevel = PermissionsLevel.MOD;
+addAlias.permissionsLevel = PermissionsLevel.VIP;
 
 export default addAlias;

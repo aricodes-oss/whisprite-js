@@ -28,6 +28,6 @@ const addCommand = async ({ say, args, argsString }) => {
 
 addCommand.command = 'addcommand';
 addCommand.aliases = ['newcommand'];
-addCommand.permissionsLevel = PermissionsLevel.MOD;
+addCommand.permissionsLevel = PermissionsLevel.VIP;
 
 export default addCommand;
