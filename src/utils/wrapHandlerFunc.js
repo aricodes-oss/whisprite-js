@@ -11,7 +11,9 @@ const wrapHandlerFunc = handlerFunc => async args => {
   } = handlerFunc;
 
   const commandMatches =
-    Boolean(command) && (args.command === command || aliases.includes(args.command));
+    Boolean(command) &&
+    (args.command.toLowerCase() === command.toLowerCase() ||
+      aliases.map(s => s.toLowerCase()).includes(args.command.toLowerCase()));
   const permissionsMatch = args.message.permissionsLevel >= permissionsLevel;
 
   // Don't hit the DB unless we need to
