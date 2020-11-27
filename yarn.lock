@@ -4155,9 +4155,9 @@ which@^2.0.1:
     isexe "^2.0.0"
 
 whisparse@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/whisparse/-/whisparse-1.0.0.tgz#e2410ff003d697a25e0d79d54cc409bc9149f15e"
-  integrity sha512-qCRTeFCvs39slhMFDq1M8z6M0XKwJw5LLAeIiPjcs/rH/Vuhxqn/sQ0wJ8Ed2rAf7d7krTSu6sTMJ/VY4zuD4Q==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/whisparse/-/whisparse-1.1.0.tgz#d575e44d70c9c8b2ceb78379fa79550180592639"
+  integrity sha512-cqRzGGRG/oJVmlEUKv0tfkbVXSQTkLgvlSnHwJq5fdHrzamCj5YLoY1q9eaOwK1serKPr0XS1gCOx76wHjtx2A==
   dependencies:
     shlex "^2.0.2"
 
