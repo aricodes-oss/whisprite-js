@@ -15,12 +15,16 @@ const findQuote = async ({ args, argsString, say }) => {
   if (!quote) {
     // There's probably a way in Mongo to do this, but god are the docs obtuse
     const allDocs = await quotes.find({}).toArray();
-    const matching = allDocs.filter(doc =>
-      doc.body.toLowerCase().includes(argsString.toLowerCase()),
-    );
 
-    // Just send back a random one if multiple match
-    quote = _.sample(matching);
+    if (argsString === '') {
+      quote = _.sample(allDocs);
+    } else {
+      const matching = allDocs.filter(doc =>
+        doc.body.toLowerCase().includes(argsString.toLowerCase()),
+      );
+      // Just send back a random one if multiple match
+      quote = _.sample(matching);
+    }
   }
 
   if (!quote) {
