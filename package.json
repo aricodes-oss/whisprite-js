@@ -37,7 +37,7 @@
     "mongodb": "^3.6.2",
     "pupa": "^2.1.1",
     "shlex": "^2.0.2",
-    "whisparse": "^1.0.0",
+    "whisparse": "1.2.0",
     "yargs": "^16.1.0"
   }
 }
