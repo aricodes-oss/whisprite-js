@@ -36,6 +36,6 @@ const delQuote = async ({ args, argsString, say }) => {
 
 delQuote.command = 'delquote';
 delQuote.aliases = ['rmquote', 'deletequote', 'quotedel', 'quotedelete'];
-delCommand.permissionsLevel = PermissionsLevel.MOD;
+delQuote.permissionsLevel = PermissionsLevel.MOD;
 
 export default delQuote;
