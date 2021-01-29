@@ -25,8 +25,11 @@ const wrapHandlerFunc = handlerFunc => async args => {
       Date.now() - cooldown >= lastUsedTimestamp ||
       args.message.permissionsLevel >= overridesCooldown
     ) {
+      // eslint-disable-next-line
+      args.context.count = count;
+
       setLastTimestamp(command);
-      handlerFunc({ ...args, context: { ...args.context, count } });
+      handlerFunc(args);
     }
   }
 };
