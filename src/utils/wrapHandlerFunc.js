@@ -1,5 +1,5 @@
 import { PermissionsLevel } from 'enums';
-import { getLastTimestamp, setLastTimestamp } from 'db';
+import { getLastTimestamp, setLastTimestamp, getNextSequence } from 'db';
 
 const wrapHandlerFunc = handlerFunc => async args => {
   const {
@@ -19,13 +19,14 @@ const wrapHandlerFunc = handlerFunc => async args => {
   // Don't hit the DB unless we need to
   if (commandMatches && permissionsMatch) {
     const lastUsedTimestamp = await getLastTimestamp(command);
+    const count = await getNextSequence(command);
 
     if (
       Date.now() - cooldown >= lastUsedTimestamp ||
       args.message.permissionsLevel >= overridesCooldown
     ) {
       setLastTimestamp(command);
-      handlerFunc(args);
+      handlerFunc({ ...args, context: { ...args.context, count } });
     }
   }
 };
