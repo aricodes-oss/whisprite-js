@@ -1,5 +1,5 @@
 import { getCollection, findCommand } from 'db';
-import { TimeoutLevel } from 'enums';
+import { PermissionsLevel } from 'enums';
 
 const setCooldown = async ({ args, say }) => {
   if (args.length !== 2) {
@@ -26,6 +26,6 @@ setCooldown.aliases = [
   'modifytimeout',
   'modifycooldown',
 ];
-setCooldown.timeoutLevel = TimeoutLevel.MOD;
+setCooldown.timeoutLevel = PermissionsLevel.MOD;
 
 export default setCooldown;
