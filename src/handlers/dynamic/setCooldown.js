@@ -12,7 +12,7 @@ const setCooldown = async ({ args, say }) => {
   const commands = await getCollection('commands');
   const existing = await findCommand(name);
 
-  await commands.updateOne({ _id: existing._id }, { $set: { cooldown: Number(level) } });
+  await commands.updateOne({ _id: existing._id }, { $set: { cooldown: Number(cooldown) } });
   await say('Updated cooldown!');
 };
 
