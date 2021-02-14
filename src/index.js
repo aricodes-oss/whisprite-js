@@ -50,7 +50,7 @@ client.on('message', async input => {
   const dbCommand = await findCommand(parsed.command);
   const dbHandler = ({ say }) => say(pupa(dbCommand.output, context));
   if (dbCommand) {
-    dbHandler.command = d._id.toLowerCase();
+    dbHandler.command = dbCommand._id.toLowerCase();
   }
 
   for (const handler of handlers.concat([dbHandler])) {
