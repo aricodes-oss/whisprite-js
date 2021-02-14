@@ -48,7 +48,7 @@ client.on('message', async input => {
 
   const commands = await getCollection('commands');
   const dbCommand = await findCommand(parsed.command);
-  const dbHandler = ({ say }) => say(pupa(dbCommand.output, context));
+  const dbHandler = ({ say }) => dbCommand && say(pupa(dbCommand.output, context));
   if (dbCommand) {
     dbHandler.command = dbCommand._id.toLowerCase();
   }
