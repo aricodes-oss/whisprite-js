@@ -4,7 +4,7 @@ import pupa from 'pupa';
 
 import handlers from 'handlers';
 import { getPermissionsLevel, wrapHandlerFunc } from 'utils';
-import { getCollection } from 'db';
+import { getCollection, findCommand } from 'db';
 
 import 'environment';
 
@@ -47,14 +47,13 @@ client.on('message', async input => {
   };
 
   const commands = await getCollection('commands');
-  let dbCommands = await commands.find({}).toArray();
-  dbCommands = dbCommands.map(d => {
-    const result = ({ say }) => say(pupa(d.output, context));
-    Object.assign(result, d, { command: d._id.toLowerCase() });
-    return wrapHandlerFunc(result);
-  });
+  const dbCommand = await findCommand(parsed.command);
+  const dbHandler = ({ say }) => say(pupa(dbCommand.output, context));
+  if (dbCommand) {
+    dbHandler.command = d._id.toLowerCase();
+  }
 
-  for (const handler of handlers.concat(dbCommands)) {
+  for (const handler of handlers.concat([dbHandler])) {
     handler({
       ...parsed,
       message,
