@@ -4,7 +4,7 @@ import pupa from 'pupa';
 
 import handlers from 'handlers';
 import { getPermissionsLevel, wrapHandlerFunc } from 'utils';
-import { getCollection, findCommand } from 'db';
+import { findCommand } from 'db';
 
 import 'environment';
 
@@ -46,7 +46,6 @@ client.on('message', async input => {
     channel: message.channelName,
   };
 
-  const commands = await getCollection('commands');
   const dbCommand = await findCommand(parsed.command);
   const dbHandler = ({ say }) => dbCommand && say(pupa(dbCommand.output, context));
   if (dbCommand) {
