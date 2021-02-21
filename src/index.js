@@ -52,7 +52,7 @@ client.on('message', async input => {
     dbHandler.command = dbCommand._id.toLowerCase();
   }
 
-  for (const handler of handlers.concat([dbHandler])) {
+  for (const handler of handlers.concat([wrapHandlerFunc(dbHandler)])) {
     handler({
       ...parsed,
       message,
