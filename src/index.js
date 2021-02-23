@@ -50,6 +50,7 @@ client.on('message', async input => {
   const dbHandler = ({ say }) => dbCommand && say(pupa(dbCommand.output, context));
   if (dbCommand) {
     dbHandler.command = dbCommand._id.toLowerCase();
+    dbHandler.aliases = dbCommand.aliases;
   }
 
   for (const handler of handlers.concat([wrapHandlerFunc(dbHandler)])) {
