@@ -49,6 +49,7 @@ client.on('message', async input => {
   const dbCommand = await findCommand(parsed.command);
   const dbHandler = ({ say }) => dbCommand && say(pupa(dbCommand.output, context));
   if (dbCommand) {
+    dbHandler.command = dbCommand._id;
     Object.assign(dbHandler, dbCommand);
   }
 
