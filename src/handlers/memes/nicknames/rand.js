@@ -11,6 +11,6 @@ const rand = async ({ say }) => {
 };
 
 rand.command = 'nickname';
-rand.aliases = ['randomnick', 'randomnickname', 'getrandomnickname', 'randnick', 'backincollege'];
+rand.aliases = ['randomnick', 'randomnickname', 'getrandomnickname', 'randnick', 'backincollege', 'college'];
 
 export default rand;
