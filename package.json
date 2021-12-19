@@ -31,7 +31,7 @@
     "pretty-quick": "^3.1.0"
   },
   "dependencies": {
-    "dank-twitch-irc": "^4.1.0",
+    "dank-twitch-irc": "^4.3.0",
     "dotenv": "^8.2.0",
     "lodash": "^4.17.20",
     "mongodb": "^3.6.2",
