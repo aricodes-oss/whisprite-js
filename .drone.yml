@@ -1,0 +1,23 @@
+kind: pipeline
+type: docker
+name: publish
+
+platform:
+  os: linux
+  arch: arm64
+
+trigger:
+  branch:
+    - main
+
+steps:
+  - name: build
+    image: plugins/docker
+    settings:
+      repo: cluster.gov:5000/whisprite
+      tags:
+        - latest
+      registry: cluster.gov:5000
+      insecure: true
+      mirror:
+        from_secret: DOCKER_MIRROR
