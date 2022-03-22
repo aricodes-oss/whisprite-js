@@ -6,12 +6,6 @@ services:
       dockerfile: Dockerfile.local
     volumes:
       - .:/code
+      - ./db:/db
       - /code/node_modules
       - /code/lib
-  db:
-    image: mongo
-    volumes:
-      - mongo-data:/data/db
-volumes:
-  mongo-data:
-    name: mongo-data

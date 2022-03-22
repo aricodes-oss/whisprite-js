@@ -112,3 +112,4 @@ temp/
 lib/
 .tern-port
 data/
+db/*.db

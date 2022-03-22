@@ -1,27 +1,40 @@
-import { MongoClient } from 'mongodb';
+import Datastore from 'nedb-promises';
+import path from 'path';
 
-const db = (async () => {
-  const client = new MongoClient('mongodb://db:27017/whisprite', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+export const collections = [
+  'sequences',
+  'timestamps',
+  'commands',
+  'quotes',
+  'sandwiches',
+  'nickNames',
+  'rules',
+  'bandNames',
+];
+const basePath = '/db';
+const db = {};
 
-  await client.connect();
+const initCollection = async collection => {
+  if (db[collection]) {
+    return db[collection];
+  }
 
-  return client.db('whisprite');
-})();
+  db[collection] = Datastore.create(path.join(basePath, `${collection}.db`));
+  db[collection].persistence.setAutocompactionInterval(1);
+  await db[collection].load();
 
-export const getCollection = async collName => {
-  const dbInterface = await db;
-
-  return dbInterface.collection(collName);
+  return db[collection];
 };
 
-export const getNextSequence = async collName => {
-  const dbInterface = await db;
-  const sequences = dbInterface.collection('sequences');
+const initCollections = () => Promise.allSettled(collections.map(c => initCollection(c)));
+initCollections();
 
-  await sequences.findOneAndUpdate(
+export const getCollection = c => initCollection(c);
+
+export const getNextSequence = async collName => {
+  const sequences = await getCollection('sequences');
+
+  await sequences.update(
     { _id: collName },
     { $set: { _id: collName }, $inc: { current: 1 } },
     { upsert: true },
@@ -33,10 +46,9 @@ export const getNextSequence = async collName => {
 };
 
 export const setLastTimestamp = async collName => {
-  const dbInterface = await db;
-  const timestamps = dbInterface.collection('timestamps');
+  const timestamps = await getCollection('timestamps');
 
-  await timestamps.findOneAndUpdate(
+  await timestamps.update(
     { _id: collName },
     { $set: { _id: collName, last: Date.now() } },
     { upsert: true },
@@ -48,8 +60,7 @@ export const setLastTimestamp = async collName => {
 };
 
 export const getLastTimestamp = async collName => {
-  const dbInterface = await db;
-  const timestamps = dbInterface.collection('timestamps');
+  const timestamps = await getCollection('timestamps');
 
   const newDoc = (await timestamps.findOne({ _id: collName })) || { last: 0 };
 
@@ -57,8 +68,7 @@ export const getLastTimestamp = async collName => {
 };
 
 export const findCommand = async name => {
-  const dbInterface = await db;
-  const commands = await dbInterface.collection('commands');
+  const commands = await getCollection('commands');
 
   const queryName = name.startsWith('!') ? name.slice(1).toLowerCase() : name.toLowerCase();
 

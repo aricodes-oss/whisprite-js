@@ -6,7 +6,8 @@
     "dev": "nodemon --exec 'yarn babel-node src/index.js' -e '.js'",
     "start": "NODE_ENV=production node lib/index.js",
     "lint": "eslint ./src/",
-    "fix": "eslint ./src/ --fix"
+    "fix": "eslint ./src/ --fix",
+    "ingest": "babel-node src/ingest.js"
   },
   "main": "lib/index.js",
   "files": [
@@ -34,7 +35,7 @@
     "dank-twitch-irc": "^4.3.0",
     "dotenv": "^8.2.0",
     "lodash": "^4.17.20",
-    "mongodb": "^3.6.2",
+    "nedb-promises": "^6.0.3",
     "pupa": "^2.1.1",
     "shlex": "^2.0.2",
     "whisparse": "1.2.0",
