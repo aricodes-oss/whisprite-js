@@ -4,7 +4,7 @@ import { getCollection } from 'db';
 const rand = async ({ say }) => {
   const bandNames = await getCollection('bandNames');
 
-  const list = await bandNames.find({}).toArray();
+  const list = await bandNames.find({});
   const selected = _.sample(list);
 
   say(selected.name);

@@ -15,7 +15,7 @@ const delRule = async ({ args, argsString, say }) => {
   // If a numeric ID didn't get it
   if (!rule) {
     // There's probably a way in Mongo to do this, but god are the docs obtuse
-    const allDocs = await rules.find({}).toArray();
+    const allDocs = await rules.find({});
 
     const matching = allDocs.filter(doc =>
       doc.body.toLowerCase().includes(argsString.toLowerCase()),

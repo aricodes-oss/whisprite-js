@@ -14,7 +14,7 @@ const findQuote = async ({ args, argsString, say }) => {
   // If a numeric ID didn't get it
   if (!quote) {
     // There's probably a way in Mongo to do this, but god are the docs obtuse
-    const allDocs = await quotes.find({}).toArray();
+    const allDocs = await quotes.find({});
 
     if (argsString === '') {
       quote = _.sample(allDocs);
