@@ -11,7 +11,7 @@ const addBandName = async ({ argsString, message, say }) => {
     return;
   }
 
-  await bandNames.insertOne({
+  await bandNames.insert({
     name: argsString,
     author: message.senderUsername,
     timestamp: Date.now(),

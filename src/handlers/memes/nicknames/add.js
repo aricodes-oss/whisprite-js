@@ -11,7 +11,7 @@ const addNickName = async ({ argsString, message, say }) => {
     return;
   }
 
-  await nickNames.insertOne({
+  await nickNames.insert({
     name: argsString,
     author: message.senderUsername,
     timestamp: Date.now(),

@@ -4,7 +4,7 @@ import { PermissionsLevel } from 'enums';
 const addQuote = async ({ argsString, message, say }) => {
   const quotes = await getCollection('quotes');
 
-  const result = await quotes.insertOne({
+  const result = await quotes.insert({
     _id: await getNextSequence('quotes'),
     body: argsString,
     author: message.senderUsername,

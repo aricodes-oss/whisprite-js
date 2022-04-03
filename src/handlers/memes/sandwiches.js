@@ -11,7 +11,7 @@ const sandwich = async ({ argsString, message, say }) => {
   if (existing !== null) {
     isSandwich = existing.isSandwich;
   } else {
-    await sandwiches.insertOne({
+    await sandwiches.insert({
       name,
       isSandwich,
       author: message.senderUsername,

@@ -4,7 +4,7 @@ import { PermissionsLevel } from 'enums';
 const addRule = async ({ argsString, message, say }) => {
   const rules = await getCollection('rules');
 
-  const result = await rules.insertOne({
+  const result = await rules.insert({
     _id: await getNextSequence('rules'),
     body: argsString,
     author: message.senderUsername,
