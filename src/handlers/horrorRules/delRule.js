@@ -29,7 +29,7 @@ const delRule = async ({ args, argsString, say }) => {
     return;
   }
 
-  await rules.deleteOne({ _id: rule._id });
+  await rules.remove({ _id: rule._id });
 
   say(`Deleted ${rule._id}`);
 };

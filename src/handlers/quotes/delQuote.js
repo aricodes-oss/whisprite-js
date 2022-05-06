@@ -29,7 +29,7 @@ const delQuote = async ({ args, argsString, say }) => {
     return;
   }
 
-  await quotes.deleteOne({ _id: quote._id });
+  await quotes.remove({ _id: quote._id });
 
   say(`Deleted ${quote._id}`);
 };
