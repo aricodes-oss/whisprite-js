@@ -11,7 +11,7 @@ const addRule = async ({ argsString, message, say }) => {
     timestamp: Date.now(),
   });
 
-  say(`@${message.senderUsername} - Added horror movie rule #${result.insertedId}`);
+  say(`@${message.senderUsername} - Added horror movie rule #${result._id}`);
 };
 
 addRule.command = 'addrule';

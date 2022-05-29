@@ -11,7 +11,7 @@ const addQuote = async ({ argsString, message, say }) => {
     timestamp: Date.now(),
   });
 
-  say(`@${message.senderUsername} - Added quote #${result.insertedId}`);
+  say(`@${message.senderUsername} - Added quote #${result._id}`);
 };
 
 addQuote.command = 'addquote';
